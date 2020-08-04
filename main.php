@@ -124,52 +124,29 @@ if (tpl_getConf("prsnl10_loaduserjs") && file_exists(DOKU_TPLINC."user/user.js")
 
     <!-- start header -->
     <div id="tmpl_header">
-        <div id="tmpl_header_left">
-            <?php
-            //include userdefined logo or show text-headline
-            echo "<div id=\"tmpl_header_logo\">\n                <a href=\"".DOKU_BASE."\" name=\"dokuwiki__top\" id=\"dokuwiki__top\" accesskey=\"h\"";
-            if (file_exists(DOKU_TPLINC."user/logo.png")){
-                //user defined PNG
-                echo "><img src=\"".DOKU_TPL."user/logo.png\" id=\"tmpl_header_logo_img\" alt=\"\"/></a>";
-            }elseif (file_exists(DOKU_TPLINC."user/logo.gif")){
-                //user defined GIF
-                echo "><img src=\"".DOKU_TPL."user/logo.gif\" id=\"tmpl_header_logo_img\" alt=\"\"/></a>";
-            }elseif (file_exists(DOKU_TPLINC."user/logo.jpg")){
-                //user defined JPG
-                echo "><img src=\"".DOKU_TPL."user/logo.jpg\" id=\"tmpl_header_logo_img\" alt=\"\"/></a>";
-            }else{
-                //default
-                echo " class=\"tmpl_header_logo_txt\">".hsc($conf["title"])."</a>";
-            }
-            echo "\n            </div>\n";
-            ?>
-        </div>
-
-        <div id="tmpl_header_right">
-            <?php
-            //show header navigation?
-            if (tpl_getConf("prsnl10_headernav")){
-                echo "<div id=\"tmpl_header_nav\">\n                ";
-                //we have to show a custom navigation
-                if (empty($conf["useacl"]) ||
-                    auth_quickaclcheck(cleanID(tpl_getConf("prsnl10_headernav_location")))){ //current user got access?
-                    //get the rendered content of the defined wiki article to use as custom navigation
-                    $interim = tpl_include_page(tpl_getConf("prsnl10_headernav_location"), false);
-                    if ($interim === "" ||
-                        $interim === false){
-                        //show creation/edit link if the defined page got no content
-                        echo "[&#160;";
-                        tpl_pagelink(tpl_getConf("prsnl10_headernav_location"), hsc($lang["prsnl10_fillplaceholder"]." (".tpl_getConf("prsnl10_headernav_location").")"));
-                        echo "&#160;]<br />";
-                    }else{
-                       //show the rendered page content
-                       echo $interim;
-                    }
-                }
-                echo "\n            </div>\n";
-            }
-            ?>
-        </div>
+	<?php
+	//show header navigation?
+	if (tpl_getConf("prsnl10_headernav")){
+	    echo "<div id=\"tmpl_header_nav\">\n                ";
+	    //we have to show a custom navigation
+	    if (empty($conf["useacl"]) ||
+		auth_quickaclcheck(cleanID(tpl_getConf("prsnl10_headernav_location")))){ //current user got access?
+		//get the rendered content of the defined wiki article to use as custom navigation
+		$interim = tpl_include_page(tpl_getConf("prsnl10_headernav_location"), false);
+		if ($interim === "" ||
+		    $interim === false){
+		    //show creation/edit link if the defined page got no content
+		    echo "[&#160;";
+		    tpl_pagelink(tpl_getConf("prsnl10_headernav_location"), hsc($lang["prsnl10_fillplaceholder"]." (".tpl_getConf("prsnl10_headernav_location").")"));
+		    echo "&#160;]<br />";
+		}else{
+		   //show the rendered page content
+		   echo $interim;
+		}
+	    }
+	    echo "\n            </div>\n";
+	}
+	?>
         <div class="clearer"></div>
     </div>
     <!-- end header -->
