@@ -496,7 +496,6 @@ div#pagewrap {
     width: 100%;
     padding: 0;
     margin: 0 0 0 0;
-    border-bottom: 1px solid #606060;
 }
 #tmpl_header #tmpl_header_left {
     position: relative;
@@ -564,6 +563,7 @@ div#pagewrap {
 #tmpl_header #tmpl_header_nav {
     position: relative;
     bottom: 0;
+    border-bottom: 1px solid #606060;
     width: 100%;
 }
 #tmpl_header #tmpl_header_nav table {
