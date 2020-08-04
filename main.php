@@ -124,29 +124,31 @@ if (tpl_getConf("prsnl10_loaduserjs") && file_exists(DOKU_TPLINC."user/user.js")
 
     <!-- start header -->
     <div id="tmpl_header">
-	<?php
-	//show header navigation?
-	if (tpl_getConf("prsnl10_headernav")){
-	    echo "<div id=\"tmpl_header_nav\">\n                ";
-	    //we have to show a custom navigation
-	    if (empty($conf["useacl"]) ||
-		auth_quickaclcheck(cleanID(tpl_getConf("prsnl10_headernav_location")))){ //current user got access?
-		//get the rendered content of the defined wiki article to use as custom navigation
-		$interim = tpl_include_page(tpl_getConf("prsnl10_headernav_location"), false);
-		if ($interim === "" ||
-		    $interim === false){
-		    //show creation/edit link if the defined page got no content
-		    echo "[&#160;";
-		    tpl_pagelink(tpl_getConf("prsnl10_headernav_location"), hsc($lang["prsnl10_fillplaceholder"]." (".tpl_getConf("prsnl10_headernav_location").")"));
-		    echo "&#160;]<br />";
-		}else{
-		   //show the rendered page content
-		   echo $interim;
-		}
-	    }
-	    echo "\n            </div>\n";
-	}
-	?>
+        <div id="tmpl_header_right">
+            <?php
+            //show header navigation?
+            if (tpl_getConf("prsnl10_headernav")){
+                echo "<div id=\"tmpl_header_nav\">\n                ";
+                //we have to show a custom navigation
+                if (empty($conf["useacl"]) ||
+                    auth_quickaclcheck(cleanID(tpl_getConf("prsnl10_headernav_location")))){ //current user got access?
+                    //get the rendered content of the defined wiki article to use as custom navigation
+                    $interim = tpl_include_page(tpl_getConf("prsnl10_headernav_location"), false);
+                    if ($interim === "" ||
+                        $interim === false){
+                        //show creation/edit link if the defined page got no content
+                        echo "[&#160;";
+                        tpl_pagelink(tpl_getConf("prsnl10_headernav_location"), hsc($lang["prsnl10_fillplaceholder"]." (".tpl_getConf("prsnl10_headernav_location").")"));
+                        echo "&#160;]<br />";
+                    }else{
+                       //show the rendered page content
+                       echo $interim;
+                    }
+                }
+                echo "\n            </div>\n";
+            }
+            ?>
+        </div>
         <div class="clearer"></div>
     </div>
     <!-- end header -->
